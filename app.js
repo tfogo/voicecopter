@@ -6,7 +6,9 @@ var express = require('express')
   , app = express()
   , mongoose = require('mongoose')
   , models = require('./models')
-  , routes = require('./routes');
+  , routes = require('./routes')
+  , arDrone = require('ar-drone')
+  , client  = arDrone.createClient();
 
 var uristring =
 process.env.MONGOLAB_URI ||
@@ -18,6 +20,8 @@ app.use(app.router);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', routes.index);
+app.get('/takeoff', routes.takeoff(client));
+app.get("/land", routes.land(client));
 
 var server = http.createServer(app);
 server.listen(process.env.PORT || 8000);
