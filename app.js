@@ -4,15 +4,9 @@
 var express = require('express')
   , http = require('http')
   , app = express()
-  , mongoose = require('mongoose')
-  , models = require('./models')
   , routes = require('./routes')
   , arDrone = require('ar-drone')
   , client  = arDrone.createClient();
-
-var uristring =
-process.env.MONGOLAB_URI ||
-'mongodb://localhost/node9000';
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
